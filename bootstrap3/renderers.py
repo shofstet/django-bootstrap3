@@ -81,7 +81,7 @@ class FieldRenderer(object):
     """
 
     def __init__(self, field, layout='', form_group_class=FORM_GROUP_CLASS,
-                 field_class=None, label_class=None, show_label=True,
+                 field_class=None, label_class=None, show_label=True, show_placeholder=True,
                  show_help=True, exclude='', set_required=True,
                  addon_before=None, addon_after=None,
                  error_css_class='', required_css_class=''):
@@ -101,7 +101,7 @@ class FieldRenderer(object):
         self.initial_attrs = self.widget.attrs.copy()
         self.field_help = text_value(mark_safe(field.help_text)) if show_help and field.help_text else ''
         self.field_errors = [conditional_escape(text_value(error)) for error in field.errors]
-        self.placeholder = field.label
+        self.placeholder = field.label if show_placeholder else ''
         self.addon_before = addon_before
         self.addon_after = addon_after
 
